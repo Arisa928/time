@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+  <title>Time Range Checker</title>
+</head>
+<body>
+  <h1>Time Range Checker</h1>
+  <label for="time">Enter time:</label>
+  <input type="text" id="time" placeholder="Enter time">
+  <br>
+  <label for="start">Enter start time:</label>
+  <input type="text" id="start" placeholder="Enter start time">
+  <br>
+  <label for="end">Enter end time:</label>
+  <input type="text" id="end" placeholder="Enter end time">
+  <br>
+  <button onclick="checkTimeRange()">Check</button>
+  <div id="result"></div>
+
+  <script>
+    function checkTimeRange() {
+      const enteredTime = parseInt(document.getElementById('time').value);
+      const enteredStart = parseInt(document.getElementById('start').value);
+      const enteredEnd = parseInt(document.getElementById('end').value);
+
+      const isInRange = checkRange(enteredTime, enteredStart, enteredEnd);
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `Time ${enteredTime} is${isInRange ? '' : ' not'} in the specified range.`;
+    }
+
+    function checkRange(time, start, end) {
+      if (start === end) {
+        return time === start;
+      }
+      if (start < end) {
+        return time >= start && time < end;
+      } else {
+        return time >= start || time + 24 < end + 24;
+      }
+    }
+  </script>
+</body>
+</html>
